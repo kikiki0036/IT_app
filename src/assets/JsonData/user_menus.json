@@ -1,0 +1,16 @@
+[
+    {
+        "icon": "bx bx-user",
+        "route": "/dashboard/customers",
+        "content": "Profile"
+    },
+    {
+        "icon": "bx bx-cog",
+        "content": "Settings"
+    },
+    {
+        "icon": "bx bx-log-out-circle bx-rotate-180",
+        "route": "/logout",
+        "content": "Logout"
+    }
+]

@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Route } from "react-router-dom";
+
+import Login from "./components/Login/Login";
+import Logout from "./components/Logout";
+import Layout from './components/layout/Layout'
+import Verify from './Verify';
+
+import { StyledEngineProvider } from '@mui/material/styles';
+import NewTable from './components/m-ui/NewTable';
+import Test_dialog_reqItem from './components/fileTest/Test_dialog_reqItem'
+
+import Signin from "./components/Login/Signin";
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+      <BrowserRouter>
+
+          <React.Fragment>
+
+              <Route exact path="/">
+                <Verify/>
+              </Route>
+              <Route path="/login">
+                <Login/>
+              </Route>
+              <Route path="/logout">
+                <Logout/>
+              </Route>
+              <Route path="/dashboard">
+                <Layout/>
+              </Route>
+              <Route path="/xxx">
+                  <Test_dialog_reqItem />
+              </Route>
+              <Route path="/zzz">
+                  <Signin />
+              </Route>
+              <Route path="/ooo">
+                  <NewTable />
+              </Route>
+              
+          </React.Fragment>
+
+      </BrowserRouter>
+
   );
 }
 

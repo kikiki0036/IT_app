@@ -1,0 +1,122 @@
+div ::-webkit-scrollbar {
+  width: 0.4vw;
+  height: 0.4vw;
+}
+
+div ::-webkit-scrollbar-thumb {
+  background-color: rgba(185, 185, 185, 0.255);
+  /* background: hsl(120 100% 20% / 1); */
+  border-radius: 100vw;
+  
+}
+
+div ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(185, 185, 185, 0.337);
+  -webkit-box-shadow: rgba(255, 255, 255, 0.938) 0px 0px 50px;
+          box-shadow: rgba(255, 255, 255, 0.938) 0px 0px 50px;
+  /* background: hsl(120 100% 10% / 1); */
+}
+
+div ::-webkit-scrollbar-track {
+  /* background-color: rgba(224, 224, 224, 0.333); */
+  /* background: hsl(120 75% 50% / 1); */
+  border-radius: 100vw;
+  margin-block: 1em;
+}
+
+div ::-webkit-scrollbar-track:hover {
+  background-color: rgba(224, 224, 224, 0.333);
+}
+
+.sss {
+  color: #0099ff25  
+}
+
+.box-generate-scoll div ::-webkit-scrollbar{
+  width: 0.4vw;
+  height: 0.4vw;
+}
+
+.box-generate-scoll div ::-webkit-scrollbar-thumb {
+  background-color: rgba(185, 185, 185, 0.255);
+  /* background: hsl(120 100% 20% / 1); */
+  border-radius: 100vw;
+  
+}
+
+.box-generate-scoll div ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(185, 185, 185, 0.337);
+  -webkit-box-shadow: rgba(255, 255, 255, 0.938) 0px 0px 50px;
+          box-shadow: rgba(255, 255, 255, 0.938) 0px 0px 50px;
+  /* background: hsl(120 100% 10% / 1); */
+}
+
+.box-generate-scoll div ::-webkit-scrollbar-track :not(.tikket-detail){
+  background-color: rgba(224, 224, 224, 0.333);
+  /* background: hsl(120 75% 50% / 1); */
+  border-radius: 100vw;
+  margin-block: 15em;
+  margin-top: 4em;
+}
+
+.box-generate-scoll .tikket-detail ::-webkit-scrollbar-track {
+  border-radius: 100vw;
+  margin-block: 1em;
+}
+.box-generate-scoll div ::-webkit-scrollbar-track:hover {
+  background-color: rgba(224, 224, 224, 0.333);
+}
+
+
+
+/* .layout-component ::-webkit-scrollbar {
+  height: 0.8vw;
+}
+
+.layout-component ::-webkit-scrollbar-thumb {
+  background-color: rgba(185, 185, 185, 0.527);
+  border-radius: 100vw;
+}
+
+.layout-component ::-webkit-scrollbar-thumb:hover {
+  background-color: #bbbbbb;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.938) 0px 0px 50px;
+          box-shadow: rgba(255, 255, 255, 0.938) 0px 0px 50px;
+}
+
+.layout-component ::-webkit-scrollbar-track {
+  background-color: rgba(224, 224, 224, 0.333);
+  border-radius: 100vw;
+  margin-block: 0.5em;
+}
+
+.layout-component ::-webkit-scrollbar-track:hover {
+  background-color: rgba(224, 224, 224, 0.333);
+}
+
+.ql-editor ::-webkit-scrollbar {
+  width: 0.8vw;
+  height: 0.8vw;
+}
+
+.ql-editor ::-webkit-scrollbar-thumb {
+  background-color: rgba(185, 185, 185, 0.527);
+  border-radius: 100vw;
+}
+
+.ql-editor ::-webkit-scrollbar-thumb:hover {
+  background-color: #bb3b3b;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.938) 0px 0px 50px;
+          box-shadow: rgba(255, 255, 255, 0.938) 0px 0px 50px;
+}
+
+.ql-editor ::-webkit-scrollbar-track {
+  background-color: rgba(224, 224, 224, 0.333);
+  border-radius: 100vw;
+  margin-block: 0.5em;
+}
+
+.ql-editor ::-webkit-scrollbar-track:hover {
+  background-color: rgba(224, 224, 224, 0.333);
+} */
+/*# sourceMappingURL=scroll.css.map */
