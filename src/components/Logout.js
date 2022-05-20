@@ -7,7 +7,7 @@ const Navbar = () => {
 
     const Logout = async () => {
         try {
-            await axios.delete('http://localhost:5000/logout');
+            await axios.delete('https://react-api-dep.herokuapp.com/logout');
             history.push("/login");
             window.location.reload();
 
