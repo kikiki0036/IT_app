@@ -8,7 +8,7 @@ function Chatbot2() {
 
   const chat = (newMessage) => {
     axios.defaults.withCredentials = false;
-    axios.post('http://localhost:8000/chatbot', { msg: newMessage }).then((response) => {
+    axios.post(' https://flask-api-deploy1.herokuapp.com/chatbot', { msg: newMessage }).then((response) => {
       addResponseMessage(`bot: ${response.data}`);
     });
     markAllAsRead();
