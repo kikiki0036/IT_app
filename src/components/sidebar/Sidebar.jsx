@@ -1,13 +1,14 @@
-import { React, useEffect,} from "react";
+import { React, useEffect, useState } from "react";
 
 import { Link } from 'react-router-dom'
 
+import axios from 'axios';
 import './sidebar.css'
 // import logo from '../../assets/images/logo.png'
 import sidebar_items from '../../assets/JsonData/sidebar_routes.json'
 
 const SidebarItem = props => {
-    
+
     useEffect(() => {
         const buttons = document.querySelectorAll('div.ef-hover')
         buttons.forEach(btn => {
@@ -45,10 +46,25 @@ const SidebarItem = props => {
     )
 }
 
-const Sidebar = props => {
-    
+const Sidebar = (props) => {
+    const [nav_prom, setNav_prom] = useState([]);
+    const arr = [];
+
+    const LoadNavbar = async (e) => {         
+
+        axios.post('http://localhost:5000/naselect', { s_id: props.IdEmp }).then((res) => {
+            setNav_prom(res.data);   
+        })
+    }
+
+    useEffect(() => {  
+            LoadNavbar();
+            
+    }, [props.IdEmp]);
+
+    console.log(nav_prom)
     const activeItem = sidebar_items.findIndex(item => item.route === props.location.pathname)
-    
+
     return (
         <div className='sidebar'>
 
@@ -58,26 +74,57 @@ const Sidebar = props => {
                     <h1>APEX</h1>
                     <p>@apexcircuit thailand</p>
                 </div>
-                <hr className="MuiDivider-root MuiDivider-fullWidth MuiDivider-light css-hr"/>
+                <hr className="MuiDivider-root MuiDivider-fullWidth MuiDivider-light css-hr" />
                 {
-                    sidebar_items.map((item, index) => (
-                        <Link to={item.route} key={index}>
-                            <SidebarItem
-                                title={item.display_name}
-                                icon={item.icon}
-                                active={index === activeItem}
-                            />
-                        </Link>
-                    ))
-                }
-                <div className="testColor">
+                    nav_prom ? 
+                        sidebar_items.map((item, index) => {     
 
-                </div>
+                            if ((nav_prom.indexOf(item.con) > -1) != true) {
+                                arr.push(
+                                    <Link to={item.route} key={index}>
+                                        <SidebarItem
+                                            title={item.display_name}
+                                            icon={item.icon}
+                                            active={index === activeItem}
+                                        />
+                                    </Link>)
+                            }
+                        })
+                    : <div>{nav_prom.length}</div>
+
+                }
 
             </div>
-
         </div>
     )
 }
-
 export default Sidebar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // sidebar_items.map((item, index) => (
+                //     <Link to={item.route} key={index}>
+                //         <SidebarItem
+                //             title={item.display_name}
+                //             icon={item.icon}
+                //             active={index === activeItem}
+                //         />
+
+
+                //     </Link>
+                // ))

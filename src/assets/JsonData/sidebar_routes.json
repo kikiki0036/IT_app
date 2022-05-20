@@ -2,7 +2,8 @@
     {
         "display_name": "Manage Job",
         "route": "/dashboard",
-        "icon": "bx bx-category-alt"
+        "icon": "bx bx-category-alt",
+        "con":"manage_job"
     },
     {
         "display_name": "Data",
@@ -12,17 +13,41 @@
     {
         "display_name": "Request",
         "route": "/dashboard/request",
-        "icon": "bx bx-task"
+        "icon": "bx bx-task",
+        "con":"approve_job"
     },
     {
         "display_name": "Generate",
         "route": "/dashboard/generate",
-        "icon": "bx bx-wrench"
+        "icon": "bx bx-wrench",
+        "con":"create_job"
+    },
+    {
+        "display_name": "Generate (EMP)",
+        "route": "/dashboard/generate-emp",
+        "icon": "bx bx-mail-send"
+    },
+    {
+        "display_name": "Chatbot (EMP)",
+        "route": "/dashboard/chatbot",
+        "icon": "bx bx-conversation"
+    },
+    {
+        "display_name": "Notebook Center (EMP)",
+        "route": "/dashboard/notebook_center",
+        "icon": "bx bx-desktop"
+    },
+    {
+        "display_name": "Assign tasks",
+        "route": "/dashboard/team-manage",
+        "icon": "bx bxl-microsoft-teams",
+        "con":"asst_job"
     },
     {
         "display_name": "Service/Config",
         "route": "/dashboard/config",
-        "icon": "bx bx-cog"
+        "icon": "bx bx-cog",
+        "con":"service_config"
     },
     {
         "display_name": "History",

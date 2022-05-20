@@ -27,11 +27,12 @@ const store = createStore(
 )
 
 document.title = 'IT SERVICE'
+///////////////////asdasdasd/////////////////
 axios.defaults.withCredentials = true;
 
 ReactDOM.render(
 
-  <Provider store={store}>
+  <Provider store={store}>    
     <React.StrictMode>
       <App />
     </React.StrictMode>

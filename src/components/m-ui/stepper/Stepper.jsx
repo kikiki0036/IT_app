@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stepper from '@mui/material/Stepper';
@@ -12,6 +13,9 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Box, ThemeProvider, createTheme } from '@mui/system';
 import Container from '@mui/material/Container';
+import moment from "moment";
+import "moment-timezone";
+import dateShortcode from 'date-shortcode'
 
 import './stepper.css'
 
@@ -85,12 +89,174 @@ const themeColor = createTheme({
 });
 
 let dataStore = new FormData();
+let dataStorebuf;
+
 // dataStore.append('ServiceType' , '');
 // dataStore.append('ServiceOption' , '');
 
 const Stepper_C = (props) => {
 
     const [activeStep, setActiveStep] = useState(0);
+
+    const Datecurrent = moment().tz("Asia/Bangkok").format("YYYY-MM-DD HH:mm:ss")
+    const DatecurrentforID = moment().tz("Asia/Bangkok").format("YYMMDD")
+
+    const formatDateTime = (datetime) => {
+      let subDatetime = datetime.split(" ")
+      let subDate = subDatetime[0].split("/")
+      
+      // let splitDate = datetime.substring()
+      return  subDate[2] + "-" + subDate[1] + "-" + subDate[0] + " " + subDatetime[1]
+    }  
+  
+    const [LastTkID, setLastTkID] = useState([]);  
+    const [LastJobNo, setLastJobNo] = useState([]);  
+    const [newidTk, setNewidTk] = useState('xxxxxxxx-xxxxxx');  
+    const [newidJOB, setNewidJOB] = useState('xxxxxxxxxxxxxx');  
+
+    
+    const CreateItemTK = async (id_tk, id_item, value) => {
+      // e.preventDefault();
+      try {
+          await axios.post('http://localhost:5000/CreateItemTK', {
+            id_tk: id_tk,
+            id_item: id_item,
+            value: value,
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  
+    const LastTikket = async (e) => {
+      try {
+        await axios.get('http://localhost:5000/LastTikket', { }).then((res) => {  
+          setLastTkID(res.data);
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  
+    const LastJob = async (e) => {
+      try {
+        await axios.get('http://localhost:5000/LastJob', { }).then((res) => {  
+          setLastJobNo(res.data);
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  
+    const CreateTK = async (newID) => {
+      // e.preventDefault();
+      try {
+          await axios.post('http://localhost:5000/CreateTikket', {
+            tikket_no: newID,
+            requestor: dataStorebuf.get('requestor'),
+            tel: dataStorebuf.get('tel'),
+            service_type: dataStorebuf.get('ServiceType'),
+            service_option: dataStorebuf.get('ServiceOption'),
+            tikket_date: Datecurrent,
+            status: "approve",
+            review_by:  dataStorebuf.get('appoveby')
+          });
+
+          let rowdataitems = JSON.parse(dataStorebuf.get('items'));
+          for(var value in rowdataitems) {
+            CreateItemTK(newID, rowdataitems[value].id_item, rowdataitems[value].value)
+          }
+          LastJob()
+  
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // console.log(formatDateTime(dataStore.get('jobstart')))
+
+    const CreateJOB = async (newID) => {
+      // e.preventDefault();
+      try {
+          await axios.post('http://localhost:5000/CreateJob', {
+            job_no: newID,
+            appove_by: dataStorebuf.get('appoveby'),
+            assign_by: dataStorebuf.get('assign'),
+            assign_detail: dataStorebuf.get('assigndetail'),
+            open_date: null,
+            start_date: formatDateTime(dataStorebuf.get('jobstart')),
+            target_date: formatDateTime(dataStorebuf.get('jobtarget')),
+            close_date: null,
+            rootcase: "-",
+            rootitem: "-",
+            solutionnote: null,
+            status: "pending",
+            tikket_no: newidTk,
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+    useEffect(() => {
+      // CreateTK();
+      if(LastTkID.length > 0) {
+        let id_index = parseInt(LastTkID[0].tikket_no.split("-")[1])
+        let new_id = ""
+        let nameId = "tk" + DatecurrentforID + "-"
+
+        if ((id_index + 1) < 10) {
+          new_id = nameId + "00000"+ ( id_index + 1 ).toString()
+
+        } else if ((id_index + 1) >= 10 && (id_index + 1) < 100) {
+          new_id = nameId + "0000"+ ( id_index + 1 ).toString()
+
+        } else if ((id_index + 1) >= 100 && (id_index + 1) < 1000) {
+          new_id = nameId + "000"+ ( id_index + 1 ).toString()
+
+        } else if ((id_index + 1) >= 1000 && (id_index + 1) < 10000) {
+          new_id = nameId + "00"+ ( id_index + 1 ).toString()
+
+        } else if ((id_index + 1) >= 10000) {
+          new_id = nameId + "0"+ ( id_index + 1 ).toString()
+
+        } else {
+          new_id = nameId + ( id_index + 1 ).toString()
+        }
+        setNewidTk(new_id)
+        CreateTK(new_id)
+      }
+    }, [LastTkID])
+  
+    useEffect(() => {
+      // CreateJOB();
+      if(LastJobNo.length > 0) {
+        let id_index = parseInt((LastJobNo[0].job_no).substring(8,))
+        let new_id = ""
+        let nameId = "RQ" + DatecurrentforID
+        if ((id_index + 1) < 10) {
+          new_id = nameId + "00000"+ ( id_index + 1 ).toString()
+
+        } else if ((id_index + 1) >= 10 && (id_index + 1) < 100) {
+          new_id = nameId + "0000"+ ( id_index + 1 ).toString()
+
+        } else if ((id_index + 1) >= 100 && (id_index + 1) < 1000) {
+          new_id = nameId + "000"+ ( id_index + 1 ).toString()
+
+        } else if ((id_index + 1) >= 1000 && (id_index + 1) < 10000) {
+          new_id = nameId + "00"+ ( id_index + 1 ).toString()
+
+        } else if ((id_index + 1) >= 10000) {
+          new_id = nameId + "0"+ ( id_index + 1 ).toString()
+        } else {
+          new_id = nameId + ( id_index + 1 ).toString()
+        }
+
+        setNewidJOB(new_id)
+        CreateJOB(new_id)
+      }
+    }, [LastJobNo])
+
 
     const ColorlibStepIcon = (item) => {
         const { active, completed, className } = item;
@@ -146,8 +312,6 @@ const Stepper_C = (props) => {
         setActiveStep(0); 
         let x = new FormData();
         dataStore = x;
-
-
     }    
 
     // useEffect(() => {
@@ -160,7 +324,20 @@ const Stepper_C = (props) => {
         const data = new FormData(event.currentTarget);
 
         if(activeStep == 3) {
-           
+          // LastTikket()
+          let x = new FormData();
+          dataStorebuf = x
+          dataStorebuf = dataStore
+          LastTikket()
+          dataStore = x
+
+        } else if (activeStep == 0) {
+
+                      dataStore.set("ServiceType" , localStorage.getItem('ServiceType'));   
+                      dataStore.set("ServiceOption" , localStorage.getItem('ServiceOption')); 
+                      dataStore.set("ServiceTypeName" , localStorage.getItem('ServiceTypeName'));   
+                      dataStore.set("ServiceOptionName" , localStorage.getItem('ServiceOptionName'));                                       
+
         } else if (activeStep == 1) {
 
                     let databuf = [];
@@ -170,12 +347,19 @@ const Stepper_C = (props) => {
                     var details = JSON.stringify(databuf);
                     dataStore.append('items', details); 
 
-        } else {
+        } else if (activeStep == 2) {
 
-                    for(var value of data.entries()) {
-                        dataStore.set(value[0] , value[1]);
-                    }
+                  for(var value of data.entries()) {
+                      dataStore.set(value[0] , value[1]);
+                  }
+                  dataStore.set("requestor", "PF" + dataStore.get('requestor'))
         }
+        //  else {
+
+        //             for(var value of data.entries()) {
+        //                 dataStore.set(value[0] , value[1]);
+        //             }
+        // }
                
         console.log("-------------------" + activeStep + "-------------------")
         for(var value of dataStore.entries()) {

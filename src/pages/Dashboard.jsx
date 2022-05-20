@@ -367,7 +367,7 @@ export const Dashboard = () => {
     const [datajobCount, setdatajobCount] = useState(
         {
             "pending": {
-              "count": 3,
+              "count": 0,
             },
             "inprogress": {
               "count": 0,
@@ -376,7 +376,7 @@ export const Dashboard = () => {
               "count": 0,
             },
             "finish": {
-              "count": 4,
+              "count": 0,
             }
         }
     );

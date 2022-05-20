@@ -31,7 +31,6 @@ const Dashboard = () => {
     }
 
     const axiosJWT = axios.create();
-
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {

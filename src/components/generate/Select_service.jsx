@@ -18,24 +18,24 @@ const sleep = (delay = 0) => {
 const LightTooltip = styled(({ className, ...props }) => (
       <Tooltip {...props} classes={{ popper: className }} />
   ))(({ theme }) => ({
-
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
-    boxShadow: theme.shadows[2],
-    fontSize: 11,
-  },
-  [`& .${tooltipClasses.arrow}`]: {
-    "&:before": {
-      // border: "1px solid #ccc",
-      boxShadow: theme.shadows[1],
+    [`& .${tooltipClasses.tooltip}`]: {
       backgroundColor: theme.palette.common.white,
-
+      color: 'rgba(0, 0, 0, 0.87)',
+      boxShadow: "0px 0px 4px #6262642f",
+      fontSize: 12,
+      fontFamily: 'Kanit'
     },
-    width: 80,
-    color: theme.palette.common.white,
-    backgroundColor: "none"
-  },
+    [`& .${tooltipClasses.arrow}`]: {
+      "&:before": {
+        // border: "1px solid #ccc",
+        boxShadow: "0px 1px 2px #6262642f ",
+        backgroundColor: theme.palette.common.white,
+  
+      },
+      width: 80,
+      color: theme.palette.common.white,
+      backgroundColor: "none"
+    },
 }));
 
 
@@ -50,16 +50,19 @@ const CssTextField = styled(TextField)(({ theme }) => ({
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: theme.palette.mode === "light" ? "#969494" : "#2b2b2b",  
+      borderColor: theme.palette.mode === "light" ? "#6262642f" : "#6262642f",  
 
     },
     "&:hover fieldset": {
-      borderColor: theme.palette.mode === "light" ? "#969494" : "#2b2b2b",    
+      borderColor: theme.palette.mode === "light" ? "#62626467" : "#62626467",    
 
     },
     "&.Mui-focused fieldset": {
      
-    }
+    },
+    "&.Mui-disabled fieldset": {
+      borderColor: theme.palette.mode === "light" ? "#6262642f" : "#6262642f",    
+    },
   },
   "& .MuiOutlinedInput-input": {
     fontSize: 14,
@@ -258,7 +261,7 @@ const Select_service = () => {
                     // margin="normal"
                     title=""
                     // oninvalid="You must fill out the form!"
-                    // required
+                    required
                     fullWidth
                     type="text"
                     id="ServiceType"
@@ -311,7 +314,7 @@ const Select_service = () => {
                     label="Service Option"
                     title=""
                     // margin="normal"
-                    // required
+                    required
                     fullWidth
                     type="text"
                     id="ServiceOption"

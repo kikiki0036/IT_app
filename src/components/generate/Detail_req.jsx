@@ -23,10 +23,12 @@ const CssTextField = styled(TextField)(({ theme }) => ({
   "& label.Mui-focused": { },
   "& label.MuiInputLabel-root ": { fontSize: 15, fontFamily: 'Kanit' },
   "& .MuiInput-underline:after": { },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": { borderColor: theme.palette.mode === "light" ? "#969494" : "#2b2b2b" },
-    "&:hover fieldset": { borderColor: theme.palette.mode === "light" ? "#969494" : "#2b2b2b" },
-    "&.Mui-focused fieldset": { borderColor: theme.palette.mode === "light" ? "#969494" : "#2b2b2b" }
+  "& .MuiInputLabel-root" : {
+    "& fieldset": { 
+      borderColor: theme.palette.mode === "light" ? "red" : "red", 
+    },
+    "&:hover fieldset": { borderColor: theme.palette.mode === "light" ? "red" : "red", },
+    "&.Mui-focused fieldset": { borderColor: theme.palette.mode === "light" ? "red" : "red", }
   },
   "& .MuiOutlinedInput-input": { fontSize: 12, fontFamily: 'Kanit' },
   "& .MuiInputBase-input": { fontSize: 12, fontFamily: 'Kanit' }

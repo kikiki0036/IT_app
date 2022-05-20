@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 
 import { styled } from "@mui/material/styles";
 import moment from "moment";
@@ -135,8 +136,8 @@ const PlanAndJob = (props) => {
 
   const Datecurrent = moment().tz("Asia/Bangkok").format("DD/MM/YY")
   // moment().tz("Asia/Bangkok").format("YYYY/MM/D HH:mm:s")
-  console.log(Datecurrent);
   let rowdataitem = JSON.parse(props.data.get('items'));
+  
   // [
   //   {
   //     id_item : "111",
@@ -149,6 +150,7 @@ const PlanAndJob = (props) => {
   //     value : "vvvv2"
   //   }
   // ]
+
 
   return (
     <Root>
@@ -212,8 +214,8 @@ const PlanAndJob = (props) => {
                 <tbody className="border-rl">
                     <tr key={"service-option"}>
                       <td className="col_txt">{Datecurrent}</td>
-                      <td className="col_txt font-kanit">{props.data.get('ServiceType')}</td>
-                      <td className="col_txt font-kanit">{props.data.get('ServiceOption')}</td>
+                      <td className="col_txt font-kanit">{props.data.get('ServiceTypeName')}</td>
+                      <td className="col_txt font-kanit">{props.data.get('ServiceOptionName')}</td>
                     </tr>
                 </tbody>  
               </table>

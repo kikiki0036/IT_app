@@ -9,7 +9,7 @@
     --txt-white: #fff;
     --main-color: #349eff;
     --second-color: #62b4ff;
-    --box-shadow: rgba(8, 123, 238, 0.2) 0px 8px 25px;
+    --box-shadow: #403e740b 2px 6px 5px;
 
     --main-bg-light: #ffffff;
     --second-bg-light: #f5f7fb;
@@ -19,7 +19,7 @@
     --main-bg-dark: #2d2d2d;
     --second-bg-dark: #202020;
     --txt-color-dark: #bbbbbb;
-    --box-shadow-dark: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+    --box-shadow-dark: #403e740b 2px 6px 5px;
 
     --main-color-blue: #349eff;
     --second-color-blue: #62b4ff;
@@ -110,6 +110,7 @@ input:focus {
     background-color: blueviolet;
     /* height: 61.9vh; */
     height: 25.8em;
+   
 }
 
 .card {
@@ -763,3 +764,6 @@ h5 {
     border: none;
   } */
   
+.testColor {
+    color:#62626467;
+}

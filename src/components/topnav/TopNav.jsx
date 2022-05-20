@@ -147,7 +147,6 @@ const Topnav = (props) => {
         section: props.section,
         image: user_image
     }
-
     return (
         <div className='topnav'>
             {/* <div className="topnav__search">

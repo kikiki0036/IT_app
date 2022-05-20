@@ -54,12 +54,15 @@ const Layout = () => {
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [users, setUsers] = useState([]);
+    const [tttttt, settttttttttttttt] = useState();
     const history = useHistory();
+
 
     useEffect(() => {
         refreshToken();
         // getUsers();
     }, [name]);
+    
     const refreshToken = async () => {
         
         try {
@@ -110,12 +113,12 @@ const Layout = () => {
     //     });
     //     setUsers(response.data);
     // }
-
+    // localStorage.setItem('id_emp', id_emp   )
     return (
         <BrowserRouter>
-            <Route render={(props) => (
+            <Route  render={(props) => (
                 <div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
-                    <Sidebar {...props}/>
+                    <Sidebar IdEmp = {id_emp} {...props}/>
                     <div className="layout__content">
                         <TopNav
                             IdEmp = {id_emp}
@@ -124,7 +127,7 @@ const Layout = () => {
                         />
                         
                             <div className="layout__content-main">
-                                <Routes/>
+                                <Routes  IdEmp = {id_emp}/>
                                 <Content_rigth
                                     IDProfile = {id_profile}
                                 />  
