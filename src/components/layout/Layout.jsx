@@ -67,6 +67,7 @@ const Layout = () => {
         
         try {
             await axios.get('https://react-api-dep.herokuapp.com/token',).then((res) => {  
+                console.log(res +"l 1");
                 setToken(res.data.accessToken);
                 const decoded = jwt_decode(res.data.accessToken);
                     setIdprofile(decoded.id_profile);
@@ -89,6 +90,7 @@ const Layout = () => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
             await axios.get('https://react-api-dep.herokuapp.com/token',).then(res => {  
+                console.log(res+"l 2");
                 config.headers.Authorization = `Bearer ${res.data.accessToken}`;
                 setToken(res.data.accessToken);
                 const decoded =  jwt_decode(res.data.accessToken);

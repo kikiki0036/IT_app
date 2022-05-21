@@ -24,6 +24,7 @@ const Layout = () => {
     const refreshToken = async () => {
         try {
             const response = await axios.get('https://react-api-dep.herokuapp.com/token');
+            console.log(response);
             const decoded = jwt_decode(response.data.accessToken);
             setExpire(decoded.exp);
             history.push("/dashboard");
