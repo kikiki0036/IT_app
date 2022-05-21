@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
-
+import Cookies from 'universal-cookie';
 const sleep = (delay = 0) => {
     return new Promise((resolve) => {
       setTimeout(resolve, delay);
@@ -16,6 +16,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
     const history = useHistory();
+    const cookies = new Cookies();
 
     const [state, setState] = useState({
         open: false,
@@ -47,7 +48,13 @@ const Login = () => {
             await axios.post('https://react-api-dep.herokuapp.com/login', {
                 email: email,
                 password: password
-            }, { withCredentials: true });
+            }, { withCredentials: true }).then((res)=>{
+                // cookies.set('myCat', 'Pacman', { path: '/' });   
+                console.log(res.data.accessToken);
+                cookies.set('refreshToken',res.data.accessToken, { path: '/' });
+                //admin@apexcircuit.com
+                // history.push("/dashboard");
+            });
             history.push("/dashboard");
         } catch (error) {
             if (error.response) {
