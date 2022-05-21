@@ -66,7 +66,7 @@ const Layout = () => {
     const refreshToken = async () => {
         
         try {
-            await axios.get('http://localhost:5000/token',).then((res) => {  
+            await axios.get('https://react-api-dep.herokuapp.com/token',).then((res) => {  
                 setToken(res.data.accessToken);
                 const decoded = jwt_decode(res.data.accessToken);
                     setIdprofile(decoded.id_profile);
@@ -88,7 +88,7 @@ const Layout = () => {
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
-            await axios.get('http://localhost:5000/token',).then(res => {  
+            await axios.get('https://react-api-dep.herokuapp.com/token',).then(res => {  
                 config.headers.Authorization = `Bearer ${res.data.accessToken}`;
                 setToken(res.data.accessToken);
                 const decoded =  jwt_decode(res.data.accessToken);
