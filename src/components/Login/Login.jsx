@@ -44,7 +44,7 @@ const Login = () => {
     const Auth = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://react-api-dep.herokuapp.com/login', {
+            await axios.post('http://localhost:5000/login', {
                 email: email,
                 password: password
             }, { withCredentials: true });
