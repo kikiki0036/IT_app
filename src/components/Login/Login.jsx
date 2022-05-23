@@ -45,15 +45,17 @@ const Login = () => {
     const Auth = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://react-api-dep.herokuapp.com/login', {
+            await axios.post('http://localhost:5000/login', {
                 email: email,
                 password: password
             }, { withCredentials: true }).then((res)=>{
-                // cookies.set('myCat', 'Pacman', { path: '/' });   
-                console.log(res.data.accessToken);
-                cookies.set('refreshToken',res.data.accessToken, { path: '/' });
+                // cookies.set('refreshToken',res.data.accessToken, { path: '/' });
+                // console.log(res.data.accessToken);
+                
+                //https://react-api-dep.herokuapp.com
+             //   http://localhost:5000
                 //admin@apexcircuit.com
-                // history.push("/dashboard");
+                
             });
             history.push("/dashboard");
         } catch (error) {

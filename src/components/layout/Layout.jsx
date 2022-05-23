@@ -20,7 +20,7 @@ import Sidebar from '../sidebar/Sidebar'
 import TopNav from '../topnav/TopNav'
 import Routes from '../Routes'
 import Content_rigth from '../content-rigth/Content_rigth'
-
+import Cookies from 'universal-cookie';
 import DatePickerExample from '../date-calendar/DatePickerCalendarExample';
 // import Note from '../note/note'
 import Editor from '../../components/Editor/Edit';
@@ -28,9 +28,8 @@ import Editor from '../../components/Editor/Edit';
 const Layout = () => {
 
     const themeReducer = useSelector(state => state.ThemeReducer)
-
+    const cookies = new Cookies();
     const dispatch = useDispatch()
-
 
 
     useEffect(() => {
@@ -59,15 +58,19 @@ const Layout = () => {
 
 
     useEffect(() => {
-        refreshToken();
+       
+            refreshToken();
+        
         // getUsers();
     }, [name]);
     
     const refreshToken = async () => {
-        
+        // console.log(token);
+     
         try {
-            await axios.get('https://react-api-dep.herokuapp.com/token',).then((res) => {  
-                console.log(res +"l 1");
+            await axios.get('http://localhost:5000/token', ).then((res) => {  
+                console.log(cookies.get('refreshToken'));
+                // {refreshToken:cookies.get('refreshToken')}
                 setToken(res.data.accessToken);
                 const decoded = jwt_decode(res.data.accessToken);
                     setIdprofile(decoded.id_profile);
@@ -89,8 +92,8 @@ const Layout = () => {
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
-            await axios.get('https://react-api-dep.herokuapp.com/token',).then(res => {  
-                console.log(res+"l 2");
+            await axios.get('http://localhost:5000/token', ).then(res => {  
+                // console.log(res+"l 2");
                 config.headers.Authorization = `Bearer ${res.data.accessToken}`;
                 setToken(res.data.accessToken);
                 const decoded =  jwt_decode(res.data.accessToken);
